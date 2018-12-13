@@ -4,6 +4,17 @@ import java.util.*;
 import com.microsoft.azure.functions.annotation.*;
 import com.microsoft.azure.functions.*;
 
+import com.mongodb.client.FindIterable; 
+import com.mongodb.client.MongoCollection; 
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.MongoClientURI;  
+
+import java.util.Iterator; 
+import org.bson.Document; 
+import com.mongodb.MongoClient; 
+import com.mongodb.MongoCredential;  
+
+
 /**
  * Azure Functions with HTTP Trigger.
  */
@@ -24,10 +35,40 @@ public class Function {
         String query = request.getQueryParameters().get("name");
         String name = request.getBody().orElse(query);
 
+        // Creating a Mongo client 
+        MongoClient mongo = new MongoClient( "localhost" , 27017 ); 
+        //MongoClient mongo = new MongoClient(new MongoClientURI("mongodb://common-hotel-database:DQOdD1h89DDIvzQAv8DnNB7asjeLAks0LqYryUXsDG3O8R2FTjb1FpiAGeHSnOb2gVmbyet2RzKMIDy1BVhZ7Q==@common-hotel-database.documents.azure.com:10255/?ssl=true&replicaSet=globaldb"));
+    
+        // Creating Credentials 
+        MongoCredential credential; 
+        credential = MongoCredential.createCredential("sampleUser", "myDb", 
+            "password".toCharArray()); 
+        System.out.println("Connected to the database successfully");  
+        
+        // Accessing the database 
+        MongoDatabase database = mongo.getDatabase("myDb"); 
+        System.out.println("Credentials ::"+ credential); 
+        
+        // Retieving a collection
+        MongoCollection<Document> collection = database.getCollection("myCollection"); 
+        System.out.println("Collection myCollection selected successfully");
+        
+        // Getting the iterable object 
+      FindIterable<Document> iterDoc = collection.find(); 
+      int i = 1; 
+
+      // Getting the iterator 
+      Iterator it = iterDoc.iterator(); 
+    
+      while (it.hasNext()) {  
+         System.out.println(it.next());  
+      i++; 
+      }
+
         if (name == null) {
             return request.createResponseBuilder(HttpStatus.BAD_REQUEST).body("Please pass a name on the query string or in the request body").build();
         } else {
-            return request.createResponseBuilder(HttpStatus.OK).body("Hello, " + name).build();
+            return request.createResponseBuilder(HttpStatus.OK).body("Hello, friend " + name).build();
         }
     }
 }
