@@ -1,0 +1,86 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Azure Cloud Functions",
+		"_postman_id": "af508f92-c0ef-45e2-9647-f01f1f3b6055",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Remote Function",
+			"request": {
+				"url": {
+					"raw": "https://azure-test-20170927220323382.azurewebsites.net/api/food?code=OGassDSVuW8r5gaZNY/UuVZLxLYUFBaUzcnbcokjNJSol7tz4Bpkpg==&fruit=apple",
+					"protocol": "https",
+					"host": [
+						"azure-test-20170927220323382",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"food"
+					],
+					"query": [
+						{
+							"key": "code",
+							"value": "OGassDSVuW8r5gaZNY/UuVZLxLYUFBaUzcnbcokjNJSol7tz4Bpkpg==",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "fruit",
+							"value": "apple",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "Local Function",
+			"request": {
+				"url": {
+					"raw": "http://localhost:7071/api/food?fruit=apple",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7071",
+					"path": [
+						"api",
+						"food"
+					],
+					"query": [
+						{
+							"key": "fruit",
+							"value": "apple",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": null
+			},
+			"response": []
+		}
+	]
+}

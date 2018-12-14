@@ -1,5 +1,6 @@
 package $package;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.microsoft.azure.functions.*;
@@ -25,6 +26,7 @@ public class FunctionTest {
     /**
      * Unit test for HttpTriggerJava method.
      */
+	@Ignore
     @Test
     public void testHttpTriggerJava() throws Exception {
         // Setup
